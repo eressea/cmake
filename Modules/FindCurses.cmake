@@ -30,9 +30,9 @@ FIND_LIBRARY(CURSES_CURSES_LIBRARY NAMES curses pdcurses )
 FIND_LIBRARY(CURSES_NCURSES_LIBRARY NAMES ncurses )
 SET(CURSES_USE_NCURSES FALSE)
 
-IF(CURSES_NCURSES_LIBRARY  AND NOT  CURSES_CURSES_LIBRARY)
+IF(CURSES_NCURSES_LIBRARY)
   SET(CURSES_USE_NCURSES TRUE)
-ENDIF(CURSES_NCURSES_LIBRARY  AND NOT  CURSES_CURSES_LIBRARY)
+ENDIF(CURSES_NCURSES_LIBRARY)
 # http://cygwin.com/ml/cygwin-announce/2010-01/msg00002.html
 # cygwin ncurses stopped providing curses.h symlinks see above
 # message.  Cygwin is an ncurses package, so force ncurses on
@@ -78,7 +78,7 @@ IF(NOT CURSES_USE_NCURSES)
   GET_FILENAME_COMPONENT(_cursesParentDir "${_cursesLibDir}" PATH)
 
   # for compatibility with older FindCurses.cmake this has to be in the cache
-  # FORCE must not be used since this would break builds which preload a cache wqith these variables set
+  # FORCE must not be used since this would break builds which preload a cache with these variables set
   SET(CURSES_INCLUDE_PATH "${CURSES_CURSES_H_PATH}" 
     CACHE FILEPATH "The curses include path")
   SET(CURSES_LIBRARY "${CURSES_CURSES_LIBRARY}"
